@@ -1,0 +1,113 @@
+version: '3'
+networks:
+  redis-cluster-networks:
+    driver: host
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+          gateway: 172.30.0.1
+
+services:
+  redis1:
+    image: redis:7.2.5
+    container_name: redis1
+    restart: always
+    ports:
+      - 6379:6379
+      - 16379:16379
+    command: redis-server /data/redis.conf
+    volumes:
+      - G:\Redis\Redis-Cluster\Redis.conf:/data/redis.conf
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - redis-cluster-networks
+      # redis-cluster-networks:
+      #   ipv4_address: 172.30.0.100
+
+  redis2:
+    image: redis:7.2.5
+    container_name: redis2
+    restart: always
+    ports:
+      - 6380:6380
+      - 16380:16380
+    command: redis-server /data/redis.conf
+    volumes:
+      - G:\Redis\Redis-Cluster\Redis-6380.conf:/data/redis.conf
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - redis-cluster-networks
+      # redis-cluster-networks:
+      #   ipv4_address: 172.30.0.101
+
+  redis3:
+    image: redis:7.2.5
+    container_name: redis3
+    restart: always
+    ports:
+      - 6381:6381
+      - 16381:16381
+    command: redis-server /data/redis.conf
+    volumes:
+      - G:\Redis\Redis-Cluster\Redis-6381.conf:/data/redis.conf
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - redis-cluster-networks
+      # redis-cluster-networks:
+      #   ipv4_address: 172.30.0.102
+
+  redis4:
+    image: redis:7.2.5
+    container_name: redis4
+    restart: always
+    ports:
+      - 6382:6382
+      - 16382:16382
+    command: redis-server /data/redis.conf
+    volumes:
+      - G:\Redis\Redis-Cluster\Redis-6382.conf:/data/redis.conf
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - redis-cluster-networks
+      # redis-cluster-networks:
+      #   ipv4_address: 172.30.0.103
+
+  redis5:
+    image: redis:7.2.5
+    container_name: redis5
+    restart: always
+    ports:
+      - 6383:6383
+      - 16383:16383
+    command: redis-server /data/redis.conf
+    volumes:
+      - G:\Redis\Redis-Cluster\Redis-6383.conf:/data/redis.conf
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - redis-cluster-networks
+      # redis-cluster-networks:
+      #   ipv4_address: 172.30.0.104
+
+  redis6:
+    image: redis:7.2.5
+    container_name: redis6
+    restart: always
+    ports:
+      - 6384:6384
+      - 16384:16384
+    command: redis-server /data/redis.conf
+    volumes:
+      - G:\Redis\Redis-Cluster\Redis-6384.conf:/data/redis.conf
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - redis-cluster-networks
+      # redis-cluster-networks:
+      #   ipv4_address: 172.30.0.105
+
+    
