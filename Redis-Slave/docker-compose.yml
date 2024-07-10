@@ -1,0 +1,48 @@
+version: '3'
+services:
+  master:
+    image: redis:7.2.5
+    container_name: redis-master
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server /data/redis.conf
+    volumes:
+      - G:\Redis\Redis-Slave\Redis.conf:/data/redis.conf
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - redis-test
+
+  slave1:
+    image: redis:7.2.5
+    container_name: redis-slave1
+    restart: always
+    ports:
+      - 6380:6380
+      - 26379:26379
+    command: redis-server /data/redis.conf
+    volumes:
+      - G:\Redis\Redis-Slave\Redis-6380.conf:/data/redis.conf
+      - G:\Redis\Redis-Slave\sentinel.conf:/data/sentinel.conf
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - redis-test
+
+  slave2:
+    image: redis:7.2.5
+    container_name: redis-slave2
+    restart: always
+    ports:
+      - 6381:6381
+    command: redis-server /data/redis.conf
+    volumes:
+      - G:\Redis\Redis-Slave\Redis-6381.conf:/data/redis.conf
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - redis-test
+
+networks:
+  redis-test:
